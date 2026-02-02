@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
-        :root { --primary: #1e3a8a; /* Biru Korporat */ --accent: #fbbf24; --bg: #f1f5f9; --text: #0f172a; }
+        :root { --primary: #1e3a8a; --accent: #fbbf24; --bg: #f1f5f9; --text: #0f172a; }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding-bottom: 50px; }
 
@@ -22,14 +22,14 @@
         .header p { margin: 0; opacity: 0.8; font-size: 0.9rem; }
         .logo-placeholder { font-size: 3rem; margin-bottom: 10px; display: block; }
 
-        /* BORANG CONTAINER */
+        /* CARD STYLE */
         .card {
             background: white; width: 90%; max-width: 500px; margin: -50px auto 20px;
             padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             position: relative; z-index: 10;
         }
 
-        /* INPUT FIELDS */
+        /* FORM ELEMENTS */
         .form-group { margin-bottom: 20px; }
         .label { display: block; font-size: 0.8rem; font-weight: 700; color: #64748b; margin-bottom: 8px; text-transform: uppercase; }
         .input-box {
@@ -38,7 +38,7 @@
         }
         .input-box:focus { border-color: var(--primary); outline: none; background: #f8fafc; }
 
-        /* PILIHAN STATUS (RADIO) */
+        /* STATUS RADIO */
         .status-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         .radio-option {
             border: 2px solid #e2e8f0; padding: 15px; border-radius: 12px;
@@ -48,8 +48,16 @@
         input[type="radio"]:checked + .radio-option {
             background: #eff6ff; border-color: var(--primary); color: var(--primary);
         }
-        
-        /* BUTANG HANTAR */
+
+        /* WAKIL SECTION (HIDDEN BY DEFAULT) */
+        #wakil-section {
+            display: none; background: #fff7ed; padding: 15px; 
+            border: 1px solid #ffedd5; border-radius: 12px; margin-top: 15px;
+            animation: slideDown 0.3s ease;
+        }
+        .wakil-title { font-size: 0.8rem; font-weight: 800; color: #ea580c; margin-bottom: 15px; display: block; border-bottom: 1px dashed #fdba74; padding-bottom: 5px; }
+
+        /* BUTTON */
         .btn-submit {
             background: var(--primary); color: white; border: none; width: 100%;
             padding: 18px; border-radius: 50px; font-size: 1rem; font-weight: 700;
@@ -58,22 +66,23 @@
         }
         .btn-submit:active { transform: scale(0.98); }
 
-        /* MESEJ KEJAYAAN */
+        /* SUCCESS & QR */
         #success-view { display: none; text-align: center; }
         .ticket-pass {
             border: 2px dashed #cbd5e1; background: #f8fafc; padding: 20px;
             border-radius: 15px; margin-top: 20px;
+        }
+        .qr-box {
+            background: white; padding: 10px; display: inline-block;
+            border-radius: 10px; margin: 15px 0; border: 1px solid #e2e8f0;
         }
         .status-badge {
             display: inline-block; padding: 5px 15px; border-radius: 50px;
             background: #dcfce7; color: #166534; font-weight: 800; font-size: 0.8rem; margin-top: 10px;
         }
 
-        /* LOADING */
-        .loader {
-            border: 3px solid #f3f3f3; border-radius: 50%; border-top: 3px solid var(--primary);
-            width: 20px; height: 20px; animation: spin 1s linear infinite; display: inline-block;
-        }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .loader { border: 3px solid #f3f3f3; border-radius: 50%; border-top: 3px solid var(--primary); width: 20px; height: 20px; animation: spin 1s linear infinite; display: inline-block; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
@@ -82,7 +91,7 @@
     <div class="header">
         <span class="logo-placeholder">🏛️</span>
         <p>JEMPUTAN RASMI</p>
-        <h1 id="eventTitle">RUU Sewaan 2026</h1>
+        <h1 id="eventTitle">MAJLIS ANUGERAH PERKHIDMATAN CEMERLANG 2026</h1>
         <p>Sila lengkapkan maklumat di bawah.</p>
     </div>
 
@@ -97,7 +106,7 @@
             <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
                 <div class="form-group">
                     <label class="label">No. Kad Pengenalan</label>
-                    <input type="number" name="Ic" class="input-box" placeholder="No. IC..." required>
+                    <input type="number" name="Ic" id="mainIc" class="input-box" placeholder="No. IC..." required>
                 </div>
                 <div class="form-group">
                     <label class="label">No. Telefon</label>
@@ -111,12 +120,8 @@
             </div>
 
             <div class="form-group">
-                <label class="label">Jawatan</label>
-                <input type="text" name="Jawatan" class="input-box" placeholder="Jawatan Rasmi..." required>
-            </div>
-
-            <div class="form-group">
-                <label class="label">Jabatan / Agensi</label>
+                <label class="label">Jawatan & Jabatan</label>
+                <input type="text" name="Jawatan" class="input-box" placeholder="Jawatan..." style="margin-bottom:10px;" required>
                 <input type="text" name="Jabatan" class="input-box" placeholder="Nama Jabatan..." required>
             </div>
 
@@ -124,18 +129,31 @@
                 <label class="label">Pengesahan Kehadiran</label>
                 <div class="status-grid">
                     <label>
-                        <input type="radio" name="Status" value="Hadir Sendiri" checked>
+                        <input type="radio" name="Status" value="Hadir Sendiri" onclick="toggleWakil(false)" checked>
                         <div class="radio-option">✅ Hadir Sendiri</div>
                     </label>
                     <label>
-                        <input type="radio" name="Status" value="Wakil">
+                        <input type="radio" name="Status" value="Wakil" onclick="toggleWakil(true)">
                         <div class="radio-option">👤 Hantar Wakil</div>
                     </label>
                 </div>
                 <label style="margin-top:10px; display:block;">
-                    <input type="radio" name="Status" value="Tidak Hadir">
+                    <input type="radio" name="Status" value="Tidak Hadir" onclick="toggleWakil(false)">
                     <div class="radio-option" style="border-color:#ef4444; color:#ef4444;">❌ Tidak Hadir</div>
                 </label>
+
+                <div id="wakil-section">
+                    <span class="wakil-title">BUTIRAN WAKIL</span>
+                    <div class="form-group">
+                        <input type="text" name="Nama_Wakil" id="wNama" class="input-box" placeholder="Nama Penuh Wakil">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="Jawatan_Wakil" id="wJawatan" class="input-box" placeholder="Jawatan Wakil">
+                    </div>
+                    <div class="form-group">
+                        <input type="number" name="Ic_Wakil" id="wIc" class="input-box" placeholder="No. IC Wakil">
+                    </div>
+                </div>
             </div>
 
             <button type="submit" class="btn-submit" id="btnHantar">HANTAR PENGESAHAN</button>
@@ -145,51 +163,72 @@
     <div class="card" id="success-view">
         <div style="font-size:3rem;">🎉</div>
         <h2 style="color:#1e3a8a; margin:10px 0;">Terima Kasih!</h2>
-        <p style="color:#64748b; font-size:0.9rem;">Maklumat anda telah direkodkan.</p>
+        <p style="color:#64748b; font-size:0.9rem;">Kehadiran anda telah disahkan.</p>
 
         <div class="ticket-pass">
-            <strong style="display:block; font-size:0.8rem; color:#64748b; text-transform:uppercase;">Status Pendaftaran</strong>
-            <span class="status-badge">DIHANTAR</span>
+            <strong style="display:block; font-size:0.8rem; color:#64748b; text-transform:uppercase;">Pas Masuk Digital</strong>
+            
+            <div class="qr-box">
+                <img id="qrImage" src="" alt="QR Code" width="150" height="150">
+            </div>
+            <br>
+            <span class="status-badge">SILA SIMPAN KOD INI</span>
+            
             <hr style="border:0; border-top:1px dashed #cbd5e1; margin:15px 0;">
-            <p style="font-size:0.85rem; margin:0;">Sila tunjukkan paparan ini di kaunter pendaftaran jika diminta.</p>
+            <p style="font-size:0.85rem; margin:0;">Urusetia akan mengimbas kod ini semasa pendaftaran masuk.</p>
         </div>
 
-        <button onclick="location.reload()" style="background:none; border:none; color:#1e3a8a; font-weight:bold; margin-top:20px; cursor:pointer;">Isi Semula Borang</button>
-    </div>
-
-    <div style="text-align:center; padding:20px; color:#94a3b8; font-size:0.75rem;">
-        Sistem Pengurusan Acara Rasmi &copy; 2026
+        <button onclick="window.print()" style="background:var(--primary); color:white; border:none; padding:10px 20px; border-radius:10px; margin-top:20px; cursor:pointer;">Cetak / Simpan PDF</button>
     </div>
 
     <script>
         // ==========================================
         // PASTE LINK WEB APP SCRIPT ANDA DI SINI
         // ==========================================
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwlz954J1HRqIL0ExokiHTJ9MXFrM0Lxm5US3q9vDhE5ax_jqvOlXK2qvhx8bW7YRBLOg/exec'; 
-        // Contoh: https://script.google.com/macros/s/AKfycbx.../exec
+        const SCRIPT_URL = 'PASTE_LINK_APPS_SCRIPT_ANDA_DI_SINI'; 
 
         const form = document.forms['rsvpForm'];
         const btn = document.getElementById('btnHantar');
         const formView = document.getElementById('form-view');
         const successView = document.getElementById('success-view');
+        const wakilSection = document.getElementById('wakil-section');
+
+        // Logic Toggle Wakil
+        function toggleWakil(show) {
+            const wInputs = [document.getElementById('wNama'), document.getElementById('wJawatan'), document.getElementById('wIc')];
+            
+            if (show) {
+                wakilSection.style.display = 'block';
+                // Jadikan wajib isi jika pilih Wakil
+                wInputs.forEach(input => input.setAttribute('required', 'true'));
+            } else {
+                wakilSection.style.display = 'none';
+                // Buang wajib isi jika tak pilih Wakil
+                wInputs.forEach(input => input.removeAttribute('required'));
+            }
+        }
 
         form.addEventListener('submit', e => {
             e.preventDefault();
-            
-            // 1. UI Loading
-            btn.innerHTML = '<div class="loader"></div> Sedang Proses...';
+            btn.innerHTML = '<div class="loader"></div> Memproses...';
             btn.disabled = true;
 
-            // 2. Hantar Data
+            // Jana QR Code berdasarkan IC (IC Wakil atau IC Sendiri)
+            const mainIc = document.getElementById('mainIc').value;
+            const wakilIc = document.getElementById('wIc').value;
+            const finalIc = wakilIc ? wakilIc : mainIc; // Jika ada wakil, guna IC wakil
+            
+            // Generate QR Link (Guna API Percuma)
+            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${finalIc}`;
+            document.getElementById('qrImage').src = qrUrl;
+
             fetch(SCRIPT_URL, { method: 'POST', body: new FormData(form)})
                 .then(response => {
-                    // 3. Jika Berjaya
                     formView.style.display = 'none';
                     successView.style.display = 'block';
                     window.scrollTo(0,0);
                 })
                 .catch(error => {
-                    // 4. Jika Gagal
                     console.error('Error!', error.message);
                     alert("Ralat sambungan! Sila cuba lagi.");
                     btn.innerHTML = 'HANTAR PENGESAHAN';
