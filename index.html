@@ -3,30 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Pengesahan Kehadiran Rasmi</title>
+    <title>Pengesahan Kehadiran - BAHUU Kelantan</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        :root { --primary: #1e3a8a; --accent: #fbbf24; --bg: #f1f5f9; --text: #0f172a; }
+        /* TEMA MERAH KELANTAN */
+        :root { 
+            --primary: #ce1126; /* Merah Kelantan */
+            --primary-dark: #990000;
+            --accent: #ffcc00; /* Kuning Diraja */
+            --bg: #f8fafc; 
+            --text: #1e293b; 
+        }
+        
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding-bottom: 50px; }
 
-        /* HEADER */
+        /* HEADER DENGAN JATA NEGERI */
         .header {
-            background: linear-gradient(135deg, #1e3a8a 0%, #172554 100%);
-            color: white; padding: 40px 20px 70px; border-radius: 0 0 30px 30px;
+            background: linear-gradient(180deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white; padding: 40px 20px 80px; border-radius: 0 0 40px 40px;
             text-align: center; position: relative;
+            box-shadow: 0 10px 30px rgba(153, 0, 0, 0.3);
         }
-        .header h1 { margin: 10px 0 5px; font-size: 1.5rem; font-weight: 800; }
-        .header p { margin: 0; opacity: 0.8; font-size: 0.9rem; }
-        .logo-placeholder { font-size: 3rem; margin-bottom: 10px; display: block; }
-
+        .logo-img { 
+            width: 100px; height: auto; margin-bottom: 15px; 
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
+        }
+        .header h3 { margin: 0; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; }
+        .header h1 { margin: 10px 0 0; font-size: 1.4rem; font-weight: 800; line-height: 1.3; }
+        
         /* CARD STYLE */
         .card {
-            background: white; width: 90%; max-width: 500px; margin: -50px auto 20px;
-            padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            position: relative; z-index: 10;
+            background: white; width: 90%; max-width: 550px; margin: -60px auto 20px;
+            padding: 30px 25px; border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            position: relative; z-index: 10; border-top: 5px solid var(--accent);
         }
 
         /* FORM ELEMENTS */
@@ -34,42 +46,43 @@
         .label { display: block; font-size: 0.8rem; font-weight: 700; color: #64748b; margin-bottom: 8px; text-transform: uppercase; }
         .input-box {
             width: 100%; padding: 15px; border: 2px solid #e2e8f0; border-radius: 12px;
-            font-size: 1rem; font-family: inherit; transition: 0.3s;
+            font-size: 1rem; font-family: inherit; transition: 0.3s; background: #f8fafc;
         }
-        .input-box:focus { border-color: var(--primary); outline: none; background: #f8fafc; }
+        .input-box:focus { border-color: var(--primary); outline: none; background: #fff; }
 
-        /* STATUS RADIO */
+        /* RADIO BUTTON STYLES */
         .status-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         .radio-option {
             border: 2px solid #e2e8f0; padding: 15px; border-radius: 12px;
-            text-align: center; cursor: pointer; font-weight: 600; font-size: 0.9rem;
+            text-align: center; cursor: pointer; font-weight: 700; font-size: 0.9rem;
+            transition: 0.2s;
         }
         input[type="radio"] { display: none; }
         input[type="radio"]:checked + .radio-option {
-            background: #eff6ff; border-color: var(--primary); color: var(--primary);
+            background: #fef2f2; border-color: var(--primary); color: var(--primary);
         }
 
-        /* WAKIL SECTION (HIDDEN BY DEFAULT) */
+        /* WAKIL SECTION */
         #wakil-section {
-            display: none; background: #fff7ed; padding: 15px; 
-            border: 1px solid #ffedd5; border-radius: 12px; margin-top: 15px;
-            animation: slideDown 0.3s ease;
+            display: none; background: #fff7ed; padding: 20px; 
+            border: 1px solid #fed7aa; border-radius: 12px; margin-top: 15px;
+            animation: fadeIn 0.3s ease;
         }
-        .wakil-title { font-size: 0.8rem; font-weight: 800; color: #ea580c; margin-bottom: 15px; display: block; border-bottom: 1px dashed #fdba74; padding-bottom: 5px; }
+        .wakil-title { font-size: 0.75rem; font-weight: 800; color: #ea580c; margin-bottom: 15px; display: block; border-bottom: 1px dashed #fdba74; padding-bottom: 5px; }
 
         /* BUTTON */
         .btn-submit {
             background: var(--primary); color: white; border: none; width: 100%;
-            padding: 18px; border-radius: 50px; font-size: 1rem; font-weight: 700;
-            cursor: pointer; box-shadow: 0 5px 15px rgba(30, 58, 138, 0.3);
-            transition: transform 0.2s;
+            padding: 18px; border-radius: 50px; font-size: 1rem; font-weight: 800;
+            cursor: pointer; box-shadow: 0 5px 20px rgba(206, 17, 38, 0.4);
+            transition: transform 0.2s; display: flex; justify-content: center; align-items: center; gap: 10px;
         }
         .btn-submit:active { transform: scale(0.98); }
 
         /* SUCCESS & QR */
         #success-view { display: none; text-align: center; }
         .ticket-pass {
-            border: 2px dashed #cbd5e1; background: #f8fafc; padding: 20px;
+            border: 2px dashed #cbd5e1; background: #f8fafc; padding: 25px;
             border-radius: 15px; margin-top: 20px;
         }
         .qr-box {
@@ -77,22 +90,33 @@
             border-radius: 10px; margin: 15px 0; border: 1px solid #e2e8f0;
         }
         .status-badge {
-            display: inline-block; padding: 5px 15px; border-radius: 50px;
-            background: #dcfce7; color: #166534; font-weight: 800; font-size: 0.8rem; margin-top: 10px;
+            display: inline-block; padding: 6px 18px; border-radius: 50px;
+            background: #dcfce7; color: #166534; font-weight: 800; font-size: 0.85rem; margin-top: 10px;
         }
 
-        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-        .loader { border: 3px solid #f3f3f3; border-radius: 50%; border-top: 3px solid var(--primary); width: 20px; height: 20px; animation: spin 1s linear infinite; display: inline-block; }
+        /* FOOTER URUSETIA */
+        .footer-info {
+            text-align: center; font-size: 0.8rem; color: #64748b; 
+            margin-top: 30px; line-height: 1.6; padding: 0 20px;
+        }
+        .footer-info strong { color: var(--text); }
+        .footer-contact { margin-top: 10px; font-size: 0.85rem; }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+        .loader { border: 3px solid #f3f3f3; border-radius: 50%; border-top: 3px solid var(--primary); width: 20px; height: 20px; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <span class="logo-placeholder">🏛️</span>
-        <p>JEMPUTAN RASMI</p>
-        <h1 id="eventTitle">MAJLIS ANUGERAH PERKHIDMATAN CEMERLANG 2026</h1>
-        <p>Sila lengkapkan maklumat di bawah.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Coat_of_arms_of_Kelantan.svg" alt="Jata Kelantan" class="logo-img">
+        
+        <h3>PENGESAHAN KEHADIRAN</h3>
+        <h1>SESI LIBAT URUS BERSAMA KERAJAAN NEGERI KELANTAN</h1>
+        <p style="font-size:0.9rem; opacity:0.9; margin-top:5px; font-weight:500;">
+            BERHUBUNG CADANGAN PENGGUBALAN RUU SEWAAN KEDIAMAN
+        </p>
     </div>
 
     <div class="card" id="form-view">
@@ -100,33 +124,37 @@
             
             <div class="form-group">
                 <label class="label">Nama Penuh (Seperti KP)</label>
-                <input type="text" name="Nama" class="input-box" placeholder="Nama Penuh..." required>
+                <input type="text" name="Nama" class="input-box" placeholder="HURUF BESAR" required>
             </div>
 
-            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
                 <div class="form-group">
-                    <label class="label">No. Kad Pengenalan</label>
-                    <input type="number" name="Ic" id="mainIc" class="input-box" placeholder="No. IC..." required>
+                    <label class="label">No. KP (Tanpa -)</label>
+                    <input type="number" name="Ic" id="mainIc" class="input-box" placeholder="Contoh: 8801..." required>
                 </div>
                 <div class="form-group">
                     <label class="label">No. Telefon</label>
-                    <input type="tel" name="Telefon" class="input-box" placeholder="012..." required>
+                    <input type="tel" name="Telefon" class="input-box" placeholder="01X..." required>
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="label">Alamat Emel</label>
-                <input type="email" name="Email" class="input-box" placeholder="contoh@emel.com" required>
+                <input type="email" name="Email" class="input-box" placeholder="nama@jabatan.gov.my" required>
             </div>
 
             <div class="form-group">
-                <label class="label">Jawatan & Jabatan</label>
-                <input type="text" name="Jawatan" class="input-box" placeholder="Jawatan..." style="margin-bottom:10px;" required>
-                <input type="text" name="Jabatan" class="input-box" placeholder="Nama Jabatan..." required>
+                <label class="label">Jawatan</label>
+                <input type="text" name="Jawatan" class="input-box" placeholder="Jawatan Rasmi" required>
             </div>
 
             <div class="form-group">
-                <label class="label">Pengesahan Kehadiran</label>
+                <label class="label">Jabatan / Agensi</label>
+                <input type="text" name="Jabatan" class="input-box" placeholder="Nama Jabatan / Agensi" required>
+            </div>
+
+            <div class="form-group">
+                <label class="label">Status Kehadiran</label>
                 <div class="status-grid">
                     <label>
                         <input type="radio" name="Status" value="Hadir Sendiri" onclick="toggleWakil(false)" checked>
@@ -143,49 +171,73 @@
                 </label>
 
                 <div id="wakil-section">
-                    <span class="wakil-title">BUTIRAN WAKIL</span>
+                    <span class="wakil-title">BUTIRAN PEGAWAI WAKIL</span>
                     <div class="form-group">
+                        <label class="label" style="color:#c2410c">Nama Wakil</label>
                         <input type="text" name="Nama_Wakil" id="wNama" class="input-box" placeholder="Nama Penuh Wakil">
                     </div>
                     <div class="form-group">
+                        <label class="label" style="color:#c2410c">Jawatan Wakil</label>
                         <input type="text" name="Jawatan_Wakil" id="wJawatan" class="input-box" placeholder="Jawatan Wakil">
                     </div>
                     <div class="form-group">
-                        <input type="number" name="Ic_Wakil" id="wIc" class="input-box" placeholder="No. IC Wakil">
+                        <label class="label" style="color:#c2410c">No. KP Wakil</label>
+                        <input type="number" name="Ic_Wakil" id="wIc" class="input-box" placeholder="No. KP Wakil">
                     </div>
                 </div>
             </div>
 
-            <button type="submit" class="btn-submit" id="btnHantar">HANTAR PENGESAHAN</button>
+            <button type="submit" class="btn-submit" id="btnHantar">
+                <span>HANTAR PENGESAHAN</span>
+            </button>
         </form>
     </div>
 
     <div class="card" id="success-view">
-        <div style="font-size:3rem;">🎉</div>
-        <h2 style="color:#1e3a8a; margin:10px 0;">Terima Kasih!</h2>
-        <p style="color:#64748b; font-size:0.9rem;">Kehadiran anda telah disahkan.</p>
+        <div style="font-size:3.5rem; margin-bottom:10px;">🎉</div>
+        <h2 style="color:var(--primary); margin:0;">Terima Kasih!</h2>
+        <p style="color:#64748b; font-size:0.9rem;">Maklumat anda berjaya direkodkan.</p>
 
         <div class="ticket-pass">
-            <strong style="display:block; font-size:0.8rem; color:#64748b; text-transform:uppercase;">Pas Masuk Digital</strong>
+            <strong style="display:block; font-size:0.8rem; color:#64748b; text-transform:uppercase;">Pas Kehadiran Digital</strong>
             
             <div class="qr-box">
-                <img id="qrImage" src="" alt="QR Code" width="150" height="150">
+                <img id="qrImage" src="" alt="QR Code" width="160" height="160">
             </div>
             <br>
-            <span class="status-badge">SILA SIMPAN KOD INI</span>
+            <span class="status-badge">SILA SIMPAN / SCREENSHOT</span>
             
             <hr style="border:0; border-top:1px dashed #cbd5e1; margin:15px 0;">
-            <p style="font-size:0.85rem; margin:0;">Urusetia akan mengimbas kod ini semasa pendaftaran masuk.</p>
+            <p style="font-size:0.85rem; margin:0; line-height:1.5;">
+                Tunjukkan Kod QR ini kepada Urusetia di meja pendaftaran pada hari kejadian.
+            </p>
         </div>
 
-        <button onclick="window.print()" style="background:var(--primary); color:white; border:none; padding:10px 20px; border-radius:10px; margin-top:20px; cursor:pointer;">Cetak / Simpan PDF</button>
+        <button onclick="window.print()" style="background:#1e293b; color:white; border:none; padding:12px 25px; border-radius:50px; margin-top:20px; cursor:pointer; font-weight:700;">
+            🖨️ Cetak / Simpan PDF
+        </button>
+        <button onclick="location.reload()" style="background:none; border:none; color:var(--primary); font-weight:bold; margin-top:15px; cursor:pointer; display:block; width:100%;">
+            Isi Semula Borang
+        </button>
+    </div>
+
+    <div class="footer-info">
+        <strong>URUSETIA</strong><br>
+        Bahagian Undang-Undang Negeri Kelantan (BAHUU)<br>
+        Pejabat Setiausaha Kerajaan Negeri Kelantan<br>
+        Aras 2, Blok 1, Kompleks Kota Darulnaim<br><br>
+        
+        <div class="footer-contact">
+            📞 09-7481987 (1204/1203) &nbsp;|&nbsp; 📠 09-7442054<br>
+            📧 <a href="mailto:bahuu@kelantan.gov.my" style="color:var(--primary); text-decoration:none; font-weight:700;">bahuu@kelantan.gov.my</a>
+        </div>
+        <br>
+        <span style="opacity:0.6; font-size:0.7rem;">Sistem Pengurusan Acara Kerajaan Negeri Kelantan &copy; 2026</span>
     </div>
 
     <script>
-        // ==========================================
-        // PASTE LINK WEB APP SCRIPT ANDA DI SINI
-        // ==========================================
-        const SCRIPT_URL = 'PASTE_LINK_APPS_SCRIPT_ANDA_DI_SINI'; 
+        // --- LINK SCRIPT YANG ANDA BEKALKAN ---
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwlz954J1HRqIL0ExokiHTJ9MXFrM0Lxm5US3q9vDhE5ax_jqvOlXK2qvhx8bW7YRBLOg/exec';
 
         const form = document.forms['rsvpForm'];
         const btn = document.getElementById('btnHantar');
@@ -196,32 +248,32 @@
         // Logic Toggle Wakil
         function toggleWakil(show) {
             const wInputs = [document.getElementById('wNama'), document.getElementById('wJawatan'), document.getElementById('wIc')];
-            
             if (show) {
                 wakilSection.style.display = 'block';
-                // Jadikan wajib isi jika pilih Wakil
                 wInputs.forEach(input => input.setAttribute('required', 'true'));
             } else {
                 wakilSection.style.display = 'none';
-                // Buang wajib isi jika tak pilih Wakil
                 wInputs.forEach(input => input.removeAttribute('required'));
             }
         }
 
         form.addEventListener('submit', e => {
             e.preventDefault();
-            btn.innerHTML = '<div class="loader"></div> Memproses...';
+            
+            // 1. UI Loading
+            btn.innerHTML = '<div class="loader"></div> &nbsp; SEDANG HANTAR...';
             btn.disabled = true;
 
-            // Jana QR Code berdasarkan IC (IC Wakil atau IC Sendiri)
+            // 2. Jana QR Code (Guna IC Wakil jika ada, jika tak guna IC Sendiri)
             const mainIc = document.getElementById('mainIc').value;
             const wakilIc = document.getElementById('wIc').value;
-            const finalIc = wakilIc ? wakilIc : mainIc; // Jika ada wakil, guna IC wakil
+            const finalIc = wakilIc ? wakilIc : mainIc; 
             
-            // Generate QR Link (Guna API Percuma)
-            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${finalIc}`;
+            // API QR Code (Simpan No IC sahaja)
+            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${finalIc}`;
             document.getElementById('qrImage').src = qrUrl;
 
+            // 3. Hantar Data ke Script
             fetch(SCRIPT_URL, { method: 'POST', body: new FormData(form)})
                 .then(response => {
                     formView.style.display = 'none';
@@ -230,7 +282,7 @@
                 })
                 .catch(error => {
                     console.error('Error!', error.message);
-                    alert("Ralat sambungan! Sila cuba lagi.");
+                    alert("Ralat sambungan! Sila periksa internet anda.");
                     btn.innerHTML = 'HANTAR PENGESAHAN';
                     btn.disabled = false;
                 });
