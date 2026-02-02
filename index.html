@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Pengesahan Kehadiran Rasmi</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root { --primary: #1e3a8a; /* Biru Korporat */ --accent: #fbbf24; --bg: #f1f5f9; --text: #0f172a; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding-bottom: 50px; }
+
+        /* HEADER */
+        .header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #172554 100%);
+            color: white; padding: 40px 20px 70px; border-radius: 0 0 30px 30px;
+            text-align: center; position: relative;
+        }
+        .header h1 { margin: 10px 0 5px; font-size: 1.5rem; font-weight: 800; }
+        .header p { margin: 0; opacity: 0.8; font-size: 0.9rem; }
+        .logo-placeholder { font-size: 3rem; margin-bottom: 10px; display: block; }
+
+        /* BORANG CONTAINER */
+        .card {
+            background: white; width: 90%; max-width: 500px; margin: -50px auto 20px;
+            padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative; z-index: 10;
+        }
+
+        /* INPUT FIELDS */
+        .form-group { margin-bottom: 20px; }
+        .label { display: block; font-size: 0.8rem; font-weight: 700; color: #64748b; margin-bottom: 8px; text-transform: uppercase; }
+        .input-box {
+            width: 100%; padding: 15px; border: 2px solid #e2e8f0; border-radius: 12px;
+            font-size: 1rem; font-family: inherit; transition: 0.3s;
+        }
+        .input-box:focus { border-color: var(--primary); outline: none; background: #f8fafc; }
+
+        /* PILIHAN STATUS (RADIO) */
+        .status-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .radio-option {
+            border: 2px solid #e2e8f0; padding: 15px; border-radius: 12px;
+            text-align: center; cursor: pointer; font-weight: 600; font-size: 0.9rem;
+        }
+        input[type="radio"] { display: none; }
+        input[type="radio"]:checked + .radio-option {
+            background: #eff6ff; border-color: var(--primary); color: var(--primary);
+        }
+        
+        /* BUTANG HANTAR */
+        .btn-submit {
+            background: var(--primary); color: white; border: none; width: 100%;
+            padding: 18px; border-radius: 50px; font-size: 1rem; font-weight: 700;
+            cursor: pointer; box-shadow: 0 5px 15px rgba(30, 58, 138, 0.3);
+            transition: transform 0.2s;
+        }
+        .btn-submit:active { transform: scale(0.98); }
+
+        /* MESEJ KEJAYAAN */
+        #success-view { display: none; text-align: center; }
+        .ticket-pass {
+            border: 2px dashed #cbd5e1; background: #f8fafc; padding: 20px;
+            border-radius: 15px; margin-top: 20px;
+        }
+        .status-badge {
+            display: inline-block; padding: 5px 15px; border-radius: 50px;
+            background: #dcfce7; color: #166534; font-weight: 800; font-size: 0.8rem; margin-top: 10px;
+        }
+
+        /* LOADING */
+        .loader {
+            border: 3px solid #f3f3f3; border-radius: 50%; border-top: 3px solid var(--primary);
+            width: 20px; height: 20px; animation: spin 1s linear infinite; display: inline-block;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <span class="logo-placeholder">🏛️</span>
+        <p>JEMPUTAN RASMI</p>
+        <h1 id="eventTitle">RUU Sewaan 2026</h1>
+        <p>Sila lengkapkan maklumat di bawah.</p>
+    </div>
+
+    <div class="card" id="form-view">
+        <form id="rsvpForm">
+            
+            <div class="form-group">
+                <label class="label">Nama Penuh (Seperti KP)</label>
+                <input type="text" name="Nama" class="input-box" placeholder="Nama Penuh..." required>
+            </div>
+
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+                <div class="form-group">
+                    <label class="label">No. Kad Pengenalan</label>
+                    <input type="number" name="Ic" class="input-box" placeholder="No. IC..." required>
+                </div>
+                <div class="form-group">
+                    <label class="label">No. Telefon</label>
+                    <input type="tel" name="Telefon" class="input-box" placeholder="012..." required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="label">Alamat Emel</label>
+                <input type="email" name="Email" class="input-box" placeholder="contoh@emel.com" required>
+            </div>
+
+            <div class="form-group">
+                <label class="label">Jawatan</label>
+                <input type="text" name="Jawatan" class="input-box" placeholder="Jawatan Rasmi..." required>
+            </div>
+
+            <div class="form-group">
+                <label class="label">Jabatan / Agensi</label>
+                <input type="text" name="Jabatan" class="input-box" placeholder="Nama Jabatan..." required>
+            </div>
+
+            <div class="form-group">
+                <label class="label">Pengesahan Kehadiran</label>
+                <div class="status-grid">
+                    <label>
+                        <input type="radio" name="Status" value="Hadir Sendiri" checked>
+                        <div class="radio-option">✅ Hadir Sendiri</div>
+                    </label>
+                    <label>
+                        <input type="radio" name="Status" value="Wakil">
+                        <div class="radio-option">👤 Hantar Wakil</div>
+                    </label>
+                </div>
+                <label style="margin-top:10px; display:block;">
+                    <input type="radio" name="Status" value="Tidak Hadir">
+                    <div class="radio-option" style="border-color:#ef4444; color:#ef4444;">❌ Tidak Hadir</div>
+                </label>
+            </div>
+
+            <button type="submit" class="btn-submit" id="btnHantar">HANTAR PENGESAHAN</button>
+        </form>
+    </div>
+
+    <div class="card" id="success-view">
+        <div style="font-size:3rem;">🎉</div>
+        <h2 style="color:#1e3a8a; margin:10px 0;">Terima Kasih!</h2>
+        <p style="color:#64748b; font-size:0.9rem;">Maklumat anda telah direkodkan.</p>
+
+        <div class="ticket-pass">
+            <strong style="display:block; font-size:0.8rem; color:#64748b; text-transform:uppercase;">Status Pendaftaran</strong>
+            <span class="status-badge">DIHANTAR</span>
+            <hr style="border:0; border-top:1px dashed #cbd5e1; margin:15px 0;">
+            <p style="font-size:0.85rem; margin:0;">Sila tunjukkan paparan ini di kaunter pendaftaran jika diminta.</p>
+        </div>
+
+        <button onclick="location.reload()" style="background:none; border:none; color:#1e3a8a; font-weight:bold; margin-top:20px; cursor:pointer;">Isi Semula Borang</button>
+    </div>
+
+    <div style="text-align:center; padding:20px; color:#94a3b8; font-size:0.75rem;">
+        Sistem Pengurusan Acara Rasmi &copy; 2026
+    </div>
+
+    <script>
+        // ==========================================
+        // PASTE LINK WEB APP SCRIPT ANDA DI SINI
+        // ==========================================
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwlz954J1HRqIL0ExokiHTJ9MXFrM0Lxm5US3q9vDhE5ax_jqvOlXK2qvhx8bW7YRBLOg/exec'; 
+        // Contoh: https://script.google.com/macros/s/AKfycbx.../exec
+
+        const form = document.forms['rsvpForm'];
+        const btn = document.getElementById('btnHantar');
+        const formView = document.getElementById('form-view');
+        const successView = document.getElementById('success-view');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            
+            // 1. UI Loading
+            btn.innerHTML = '<div class="loader"></div> Sedang Proses...';
+            btn.disabled = true;
+
+            // 2. Hantar Data
+            fetch(SCRIPT_URL, { method: 'POST', body: new FormData(form)})
+                .then(response => {
+                    // 3. Jika Berjaya
+                    formView.style.display = 'none';
+                    successView.style.display = 'block';
+                    window.scrollTo(0,0);
+                })
+                .catch(error => {
+                    // 4. Jika Gagal
+                    console.error('Error!', error.message);
+                    alert("Ralat sambungan! Sila cuba lagi.");
+                    btn.innerHTML = 'HANTAR PENGESAHAN';
+                    btn.disabled = false;
+                });
+        });
+    </script>
+
+</body>
+</html>
