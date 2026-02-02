@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Pengesahan Kehadiran - BAHUU Kelantan</title>
+    <title>Pengesahan Kehadiran - Kerajaan Negeri Kelantan</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* TEMA MERAH KELANTAN */
+        /* TEMA RASMI KELANTAN */
         :root { 
-            --primary: #ce1126; /* Merah Kelantan */
+            --primary: #ce1126; 
             --primary-dark: #990000;
-            --accent: #ffcc00; /* Kuning Diraja */
+            --accent: #ffcc00; 
             --bg: #f8fafc; 
             --text: #1e293b; 
         }
@@ -20,19 +20,22 @@
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding-bottom: 50px; }
 
-        /* HEADER DENGAN JATA NEGERI */
+        /* HEADER */
         .header {
             background: linear-gradient(180deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white; padding: 40px 20px 80px; border-radius: 0 0 40px 40px;
             text-align: center; position: relative;
             box-shadow: 0 10px 30px rgba(153, 0, 0, 0.3);
         }
+        
+        /* LOGO JATA KELANTAN */
         .logo-img { 
-            width: 100px; height: auto; margin-bottom: 15px; 
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
+            width: 110px; height: auto; margin-bottom: 15px; 
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
         }
+        
         .header h3 { margin: 0; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; }
-        .header h1 { margin: 10px 0 0; font-size: 1.4rem; font-weight: 800; line-height: 1.3; }
+        .header h1 { margin: 10px 0 0; font-size: 1.3rem; font-weight: 800; line-height: 1.4; }
         
         /* CARD STYLE */
         .card {
@@ -50,12 +53,11 @@
         }
         .input-box:focus { border-color: var(--primary); outline: none; background: #fff; }
 
-        /* RADIO BUTTON STYLES */
+        /* RADIO BUTTON */
         .status-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         .radio-option {
             border: 2px solid #e2e8f0; padding: 15px; border-radius: 12px;
-            text-align: center; cursor: pointer; font-weight: 700; font-size: 0.9rem;
-            transition: 0.2s;
+            text-align: center; cursor: pointer; font-weight: 700; font-size: 0.9rem; transition: 0.2s;
         }
         input[type="radio"] { display: none; }
         input[type="radio"]:checked + .radio-option {
@@ -94,13 +96,13 @@
             background: #dcfce7; color: #166534; font-weight: 800; font-size: 0.85rem; margin-top: 10px;
         }
 
-        /* FOOTER URUSETIA */
+        /* FOOTER */
         .footer-info {
             text-align: center; font-size: 0.8rem; color: #64748b; 
             margin-top: 30px; line-height: 1.6; padding: 0 20px;
         }
-        .footer-info strong { color: var(--text); }
         .footer-contact { margin-top: 10px; font-size: 0.85rem; }
+        .footer-contact a { color: var(--primary); text-decoration: none; font-weight: 700; }
         
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
         .loader { border: 3px solid #f3f3f3; border-radius: 50%; border-top: 3px solid var(--primary); width: 20px; height: 20px; animation: spin 1s linear infinite; }
@@ -110,8 +112,7 @@
 <body>
 
     <div class="header">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Coat_of_arms_of_Kelantan.svg" alt="Jata Kelantan" class="logo-img">
-        
+        <img src="https://dusuntua.com/images/listing_photos/175_06jatanegerikelantan150ppi.png" alt="Jata Kelantan" class="logo-img">
         <h3>PENGESAHAN KEHADIRAN</h3>
         <h1>SESI LIBAT URUS BERSAMA KERAJAAN NEGERI KELANTAN</h1>
         <p style="font-size:0.9rem; opacity:0.9; margin-top:5px; font-weight:500;">
@@ -124,7 +125,7 @@
             
             <div class="form-group">
                 <label class="label">Nama Penuh (Seperti KP)</label>
-                <input type="text" name="Nama" class="input-box" placeholder="HURUF BESAR" required>
+                <input type="text" name="Nama" id="mainNama" class="input-box" placeholder="HURUF BESAR" required>
             </div>
 
             <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
@@ -209,7 +210,7 @@
             
             <hr style="border:0; border-top:1px dashed #cbd5e1; margin:15px 0;">
             <p style="font-size:0.85rem; margin:0; line-height:1.5;">
-                Tunjukkan Kod QR ini kepada Urusetia di meja pendaftaran pada hari kejadian.
+                Kod QR ini mengandungi Nama & No. KP untuk imbasan pendaftaran.
             </p>
         </div>
 
@@ -229,14 +230,13 @@
         
         <div class="footer-contact">
             📞 09-7481987 (1204/1203) &nbsp;|&nbsp; 📠 09-7442054<br>
-            📧 <a href="mailto:bahuu@kelantan.gov.my" style="color:var(--primary); text-decoration:none; font-weight:700;">bahuu@kelantan.gov.my</a>
+            📧 <a href="mailto:bahuu@kelantan.gov.my">bahuu@kelantan.gov.my</a>
         </div>
         <br>
         <span style="opacity:0.6; font-size:0.7rem;">Sistem Pengurusan Acara Kerajaan Negeri Kelantan &copy; 2026</span>
     </div>
 
     <script>
-        // --- LINK SCRIPT YANG ANDA BEKALKAN ---
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwlz954J1HRqIL0ExokiHTJ9MXFrM0Lxm5US3q9vDhE5ax_jqvOlXK2qvhx8bW7YRBLOg/exec';
 
         const form = document.forms['rsvpForm'];
@@ -245,7 +245,7 @@
         const successView = document.getElementById('success-view');
         const wakilSection = document.getElementById('wakil-section');
 
-        // Logic Toggle Wakil
+        // Logic Wakil
         function toggleWakil(show) {
             const wInputs = [document.getElementById('wNama'), document.getElementById('wJawatan'), document.getElementById('wIc')];
             if (show) {
@@ -264,16 +264,27 @@
             btn.innerHTML = '<div class="loader"></div> &nbsp; SEDANG HANTAR...';
             btn.disabled = true;
 
-            // 2. Jana QR Code (Guna IC Wakil jika ada, jika tak guna IC Sendiri)
-            const mainIc = document.getElementById('mainIc').value;
-            const wakilIc = document.getElementById('wIc').value;
-            const finalIc = wakilIc ? wakilIc : mainIc; 
+            // 2. DAPATKAN DATA UNTUK QR CODE
+            // Logik: Kalau ada wakil, ambil Nama & IC Wakil. Kalau tak, ambil Tuan Badan.
             
-            // API QR Code (Simpan No IC sahaja)
-            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${finalIc}`;
+            const mainName = document.getElementById('mainNama').value.toUpperCase();
+            const mainIc = document.getElementById('mainIc').value;
+            
+            const wakilName = document.getElementById('wNama').value.toUpperCase();
+            const wakilIc = document.getElementById('wIc').value;
+            
+            // Jika input Wakil ada isi (wakilIc wujud), guna data wakil
+            const finalName = wakilIc ? wakilName : mainName;
+            const finalIc = wakilIc ? wakilIc : mainIc; 
+
+            // Format Data QR: "Nama: ALI BIN ABU | IC: 8801..."
+            // Kita guna 'encodeURIComponent' supaya nama panjang tak error
+            const qrData = `Nama: ${finalName} | IC: ${finalIc}`;
+            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(qrData)}`;
+            
             document.getElementById('qrImage').src = qrUrl;
 
-            // 3. Hantar Data ke Script
+            // 3. Hantar Data ke Excel
             fetch(SCRIPT_URL, { method: 'POST', body: new FormData(form)})
                 .then(response => {
                     formView.style.display = 'none';
@@ -282,7 +293,7 @@
                 })
                 .catch(error => {
                     console.error('Error!', error.message);
-                    alert("Ralat sambungan! Sila periksa internet anda.");
+                    alert("Ralat sambungan! Sila cuba lagi.");
                     btn.innerHTML = 'HANTAR PENGESAHAN';
                     btn.disabled = false;
                 });
